@@ -26,7 +26,7 @@
   <span onclick="document.getElementById('id01').style.display='none'" 
 class="close" title="Close Modal">&times;</span>
 
-<form class="modal-content animate" action="http://proxy/login.php" method="post">
+<form class="modal-content animate" action="login.php" method="post">
   <div class="imgcontainer">
     <img src="https://tse1.mm.bing.net/th?id=OIP.GqIjTJaOCVoVTD_TaIErnwHaIJ&pid=Api&P=0&w=300&h=300" alt="Avatar" class="avatar">
   </div>
@@ -47,15 +47,17 @@ session_start();
     <br>
 <p id="pd"></p>
   </div>
+
 </form>
 </div>
 <!-- -->
+
 
 <!-- The Sign up Modal2 -->
 <div id="id02" class="modal">
   <span onclick="document.getElementById('id02').style.display='none'" 
 class="close" title="Close Modal">&times;</span>
-<form class="modal-content animate" action="http://proxy/addlogin.php" method="post">
+<form class="modal-content animate" action="addlogin.php" method="post">
   <div class="imgcontainer">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiJtBGGbC_GpE-XWFW3AT0h6Yph2XQlyNrRvBTyBnaBBJECG0T" alt="Avatar" class="avatar">
   </div>
