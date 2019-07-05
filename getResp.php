@@ -1,3 +1,4 @@
+
 <html>
 <head><title>responses</title></head>
 <body>
@@ -31,5 +32,6 @@ $sql="update form_".$_POST['fid']." set ".$var."='".$_POST[$var]."' where respon
  if ($conn->query($sql) === FALSE) {  echo "<br>shocking: ".$sql."<br>";   }
 }
 ?>
+
 </body>
 </html>
