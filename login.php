@@ -7,7 +7,7 @@
 <div id="id03" class="modal">
   <span onclick="document.getElementById('id03').style.display='none'" 
 class="close" title="Close Modal">&times;</span>
-"<form class="modal-content animate" action="http://proxy/signout.php" method="post">
+"<form class="modal-content animate" action="signout.php" method="post">
     <div class="container">
     <label for="uname"><b>Are you sure you want to sign out?</b></label>
     <br>
@@ -17,13 +17,12 @@ class="close" title="Close Modal">&times;</span>
 </div>
 
 <!----->
+
 <?php
 $servername = "localhost";
 $username = "root";
 $password = "redhat";
 $dbname = "wallDB";
-
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -38,7 +37,8 @@ if(isset($_POST['submitbtn'])) {
  $sql1 = "select * from myUsers where name='".$_POST['uname']."';";
  $result1 = mysqli_query($conn,$sql1);
  $row1 = mysqli_fetch_array($result1) ;
-//First Login
+
+ //First Login
   if (hash('ripemd160', $_POST['psw'])==$row1['password'] && $_POST['psw']!=null) {  
      //save username
      $_SESSION['user']=$_POST['uname'];
@@ -54,8 +54,8 @@ else
     $row2 = mysqli_fetch_array($result2) ;
     if ($_SESSION['rand']==null || $_SESSION['user']==null) { 
     //invalid login
-      echo "<h2>PLease login first</h2>";
-      echo "<a href='http://proxy/wall.php'><h3>Go to Home Page</h3></a>";
+echo "<h2>PLease login first</h2>";
+      echo "<a href='wall.php'><h3>Go to Home Page</h3></a>";
     }
     else {
     // refreshing or updating
@@ -85,9 +85,9 @@ else{
 $sqlget = "select * from myUsers where name='".$_SESSION['user']."';";
  $result = mysqli_query($conn, $sqlget);
  while($row =mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-if ($row['form_name']!=null) { 
+	if ($row['form_name']!=null) { 
  	echo "<tr><td>";
-	echo $i;	
+echo $i;	
         echo "</td><td>";
 	echo $row['form_name'];
 	echo "</td><td>";
@@ -95,7 +95,7 @@ if ($row['form_name']!=null) {
 	echo "</td><td>";
 	echo $row['form_id'];
 	echo "</td><td>";
-	echo "<a href='http://proxy/seeResp.php?id=".$row['form_id']."'>View Responses</a>";
+	echo "<a href='seeResp.php?id=".$row['form_id']."'>View Responses</a>";
 	echo "</td></tr>";
      $i+=1;
 	}
@@ -108,17 +108,17 @@ echo "</table></center>";
 <div id="id06" class="modal">
   <span onclick="document.getElementById('id06').style.display='none'" 
 class="close" title="Close Modal">&times;</span>
-<form class="modal-content animate" action="http://proxy/form.php" method="post">
+<form class="modal-content animate" action="form.php" method="post">
     <div class="container" style="width:100%;">
-<h2>Create new form:</h2>
+ <h2>Create new form:</h2>
   <table class="tabid" style="position:relative;top: -20px; padding:0;">
-   <form class="newstuff" action="http://proxy/form.php" method="post" style="text-align: left;"> 
+   <form class="newstuff" action="form.php" method="post" style="text-align: left;"> 
     <tr><td><label for="fname"><b>Name</b></label></td>
          <td><input type="text" placeholder="Name of form" name="fname" style="width:100%;" required></td></tr>
    <?php
 session_start();
    $rand=rand();
-   $_SESSION['fid']=$rand;
+$_SESSION['fid']=$rand;
   ?>
     <tr><td><label for="fdesc"><b>Description</b></label></td>
     <td><input type="text" placeholder="Describe the form" name="fdesc" style="width:100%;" required></td></tr>
