@@ -26,13 +26,11 @@ if ($row['count(*)']==0)
   {
    // insert user to myUsers table
     $sql="insert into myUsers (name,password) values('".$_POST['Nuname']."','".hash('ripemd160', $_POST['Npsw1'])."');"; 
-    if ($conn->query($sql) === FALSE) 
+if ($conn->query($sql) === FALSE) 
      {  echo "<br>shocking: ".$sql."<br>";   }
-    else
-     { echo "<br>notShocking"; }
    //redirect after 1 sec
-    sleep(1);
-    header('Location: http://proxy/wall.php');
+    //sleep(1);
+    header('Location: wall.php');
   }
   else
   {
