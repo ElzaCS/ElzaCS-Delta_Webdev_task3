@@ -56,6 +56,7 @@ echo "</tr>";
 }
 echo "</table></center>";
 ?>
-<br><center><a href="http://proxy/login.php"><strong>Back</strong></a></center>
+<br><center><a href="login.php"><strong>Back</strong></a></center>
 </body>
 </html>
+
