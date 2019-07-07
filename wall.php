@@ -8,19 +8,58 @@
 
 <div style="background-color:black; color:white; top:0px;">
 <p><h1>Welcome <?php session_start(); echo $_SESSION['user'];?> to the Form-Generator</h1></p>
-</div>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "redhat";
 
-	<!-- Button to open the modal login form -->
-<button onclick="document.getElementById('id01').style.display='block'" style="height:27px;width:10%;align:'right';">Login</button>
-	<!-- Button to open the modal login form -->
-<button onclick="document.getElementById('id02').style.display='block'" style="height:27px;width:10%;right:'0px';">Sign up</button>
+// Create connection for database
+$conn = new mysqli($servername, $username, $password);
+// Check connection for database
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+// Create database
+$sql = "CREATE DATABASE wallDB;";
+$dbname="wallDB";
+if ($conn->query($sql) === TRUE) { 
+
+// Create connection for table
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection for table
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+//create table
+   $sql1="create table myUsers (id int(5) auto_increment primary key,name varchar(20) not null,password varchar(45) not null,uniqueID int(15) unsigned,form_name varchar(20) not null,form_desc varchar(40) not null,form_id int(10));";
+    if ($conn->query($sql1) === FALSE) 
+	echo "error creating table myUsers";
+    $sql2="create table forms (form_id int(15),field_name varchar(20) not null,field_type varchar(10) not null);";
+    if ($conn->query($sql2) === FALSE) 
+	echo "error creating table forms";
+     $sql3="create table responses (id int(10) auto_increment primary key,form_id int(15) unsigned,field_name varchar(20) not null,field_input varchar(20) not null);";
+    if ($conn->query($sql3) === FALSE) 
+	echo "error creating table responses";
+}
+?>
+</div>
 
 <br>
 <article><h2>Forms</h2>
 <h3><p>Forms can be a lot of help when you need to cunduct surveys or get the general opinion of a huge crowd of people. Form-Generators make it easier to create forms and collect the responses for your analysis.</p></h3></article>
 
+<br>
+<!-- Button to open the modal login form -->
+<center><button onclick="document.getElementById('id01').style.display='block'" style="height:27px;width:10%;align:'right';">Login</button>
+	<!-- Button to open the modal login form -->
+<button onclick="document.getElementById('id02').style.display='block'" style="height:27px;width:10%;right:'0px';">Sign up</button></center>
+
+<br>
 <article><h2>Have an account?</h2>
-<h3><p>Login to your account to create forms. If you dont have an account, please click the sign up button to create an account and login.<p></h3></article>
+<h3><p>Click the Login button to create forms. </p>
+	<h2>Don't have an account?</h2>
+<h3><p>Click the Sign up button to create an account and then login.<p></h3></article>
+
 <!-- The Login Modal -->
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" 
@@ -41,6 +80,7 @@ class="close" title="Close Modal">&times;</span>
 session_start();
    $rand=rand();
    $_SESSION['rand']=$rand;
+
   ?>
 <input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
     <button type="submit" name="submitbtn" style="height:35px;width:80%;">Login</button>
@@ -51,7 +91,6 @@ session_start();
 </form>
 </div>
 <!-- -->
-
 
 <!-- The Sign up Modal2 -->
 <div id="id02" class="modal">
