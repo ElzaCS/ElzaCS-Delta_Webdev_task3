@@ -28,9 +28,10 @@ $resN = mysqli_query($conn, $sqlN);
 //insert responses to responses table
 while($rowN =mysqli_fetch_array($resN, MYSQLI_ASSOC)) {
 $var=$rowN['field_name'];
+    if ($rowN['field_type']!="image") {
 $sql="update form_".$_POST['fid']." set ".$var."='".$_POST[$var]."' where response_id=".$_SESSION['rid'].";";
  if ($conn->query($sql) === FALSE) {  echo "<br>shocking: ".$sql."<br>";   }
-}
+}}
 ?>
 
 </body>
