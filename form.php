@@ -58,19 +58,38 @@ class="close" title="Close Modal">&times;</span>
          <td><input type="text" placeholder="enter label(single word, no spaces)" name="txt" style="width:100%;" required></td></tr>
 
     <tr><td><label for="tdesc"><b>Field Type</b></label></td>
-    <td> <select name='typ'><option value="text">Text</option><option value="number">Number</option></select></td></tr>
+    <td> <select name='typ'><option value="text">Text</option><option value="number">Number</option><option value="image">Image</option><option value="dropdown">Dropdown</option><option value="radio">Radio</option></select></td></tr>
     <tr><td colspan='2'><center><button type="submit" name="numsubmitbtn" style="height:40px;width:235px">Add Field</button></center></td></tr>
    </form>
 </table></center>
 <!-- -->
-<?php
+<?php if ($_POST['typ']!='') { ?>
+<form class="newstuff2" action="form.php" method="post" style="text-align:left;">
+    <tr><td><label><b>Field Type</b></label></td>
+        <td><input name='typ' value'<?php echo $_POST['typ'];?>'></input></td></tr>
+            <tr><td><label><b>Field Name</b></label></td>
+            <?php if ($_POST['typ']=="dropdown" || $_POST['typ']=="radio") {
+    echo "<tr><td><Label><b>Option1 Label</b></label></td>";
+    echo "<td><input type='text' placeholder='enter label(no spaces)' name='op1' style='width:100%;' required</td></tr>";
+    echo "<tr><td><Label><b>Option2 Label</b></label></td>";
+    echo "<td><input type='text' placeholder='enter label(no spaces)' name='op2' style='width:100%;' required</td></tr>";
+    echo "<tr><td><Label><b>Option3 Label</b></label></td>";
+    echo "<td><input type='text' placeholder='enter label(no spaces)' name='op3' style='width:100%;' required</td></tr>";
+    echo "<tr><td><Label><b>Option4 Label</b></label></td>";
+    echo "<td><input type='text' placeholder='enter label(no spaces)' name='op4' style='width:100%;' required</td></tr>";
+}?>
+   <tr><td colspan='2'><center><button type="submit" name="numsubmitbtn" style="height:40px;width:235px;'>Add Field</button></center></td></tr>
+</form>
+<?php }?>
+</table></center>
+<?php    
 //create table "form_formID" for responses
 $sql="create table form_".$_SESSION['fid']." (response_id int(10) unsigned);";
 if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
   }
 
 //sql to add text fields to form
-if ($_POST['typ']=="text") {
+if ($_POST['typ']=="text" && $_POST['txt']!=null) {
   $sql="insert into forms (form_id,field_name,field_type) values(".$_SESSION['fid'].",'".$_POST['txt']."','text');"; 
   if ($conn->query($sql) === FALSE) {  echo "<br>error in: ".$sql."<br>";   }
 
@@ -80,14 +99,65 @@ if ($_POST['typ']=="text") {
 }
 
 //sql to add number fields to form
-if ($_POST['typ']=="number") {
+if ($_POST['typ']=="number" && $_POST['txt']!=null) {
   $sql="insert into forms (form_id,field_name,field_type) values(".$_SESSION['fid'].",'".$_POST['txt']."','number');"; 
-  if ($conn->query($sql) === FALSE) {  echo "<br>error in: ".$sql."<br>";   }
+  if ($conn->query($sql) === FALSE) { // echo "<br>error in: ".$sql."<br>";   
+  }
 
   //add the number field label to responses table
   $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(20) not null;";
-  if ($conn->query($sql) === FALSE) {  echo "<br>error in: ".$sql."<br>"; }
+  if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
+  }
 }
+    
+ //sql to add image to form
+    if ($_POST['typ']=="image" && $_POST['txt']!=null) {
+        $sql="insert into forms (form_id,field_name,field_type) values(".$_SESSION['fid'].",'".$_POST['txt']."','image');"; 
+ 
+ //sql to add dropdown to form
+if ($_POST['typ']=="dropdown" && $_POST['txt']!=null) {
+  $sql="insert into forms (form_id,field_name,field_type) values(".$_SESSION['fid'].",'".$_POST['txt']."','dropdown');"; 
+  if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
+ }
+
+  //add the dropdown field label to responses table
+  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000) not null;";
+  if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
+ }
+    //echo "<br>".$_POST['op1'].", ".$_POST['op2'].", ".$_POST['op3'].", ".$_POST['op4'];
+    if ($_POST['op1']!='')
+        $sql="update forms set name1='".$_POST['op1']."' where field_name='".$_POST['txt']."';";
+        if ($conn->query($sql)===FALSE) {}
+        $sql="update forms set name2='".$_POST['op2']."' where field_name='".$_POST['txt']."';";
+        if ($conn->query($sql)===FALSE) {}
+        $sql="update forms set name3='".$_POST['op3']."' where field_name='".$_POST['txt']."';";
+        if ($conn->query($sql)===FALSE) {}
+        $sql="update forms set name4='".$_POST['op4']."' where field_name='".$_POST['txt']."';";
+        if ($conn->query($sql)===FALSE) {}
+    
+} 
+ //sql to add radio to form
+if ($_POST['typ']=="radio" && $_POST['txt']!=null) {
+  $sql="insert into forms (form_id,field_name,field_type) values(".$_SESSION['fid'].",'".$_POST['txt']."','radio');"; 
+  if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
+ }
+
+  //add the radio field label to responses table
+  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000) not null;";
+  if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
+ }
+    //echo "<br>".$_POST['op1'].", ".$_POST['op2'].", ".$_POST['op3'].", ".$_POST['op4'];
+    if ($_POST['op1']!='')
+        $sql="update forms set name1='".$_POST['op1']."' where field_name='".$_POST['txt']."';";
+        if ($conn->query($sql)===FALSE) {}
+        $sql="update forms set name2='".$_POST['op2']."' where field_name='".$_POST['txt']."';";
+        if ($conn->query($sql)===FALSE) {}
+        $sql="update forms set name3='".$_POST['op3']."' where field_name='".$_POST['txt']."';";
+        if ($conn->query($sql)===FALSE) {}
+        $sql="update forms set name4='".$_POST['op4']."' where field_name='".$_POST['txt']."';";
+        if ($conn->query($sql)===FALSE) {}
+    
+} 
 //PRINTING FORM PREVIEW
  $sqlN="select * from myUsers where form_id=".$_SESSION['fid'].";";
 $resN = mysqli_query($conn, $sqlN);
@@ -100,8 +170,28 @@ echo "<tr><td colspan='2'><center>".$rowN['form_desc']."</center></td></tr>";
 $sqlN="select * from forms where form_id=".$_SESSION['fid'].";";
 $resN = mysqli_query($conn, $sqlN);
  while($rowN =mysqli_fetch_array($resN, MYSQLI_ASSOC)) {
+     if ($rowN['field_type']=="image")
+       echo "<tr><td><img src='".$rowN['field_name']."' width='200' height='200'></td></tr>";
+     else if ($rowN['field_type']=="dropdown") {
+        echo "<tr><td>".$rowN['field_name']."</td><td><select>";
+         if ($rowN['name1']!=null) echo "<option>".$rowN['name1']."</option>";
+         if ($rowN['name2']!=null) echo "<option>".$rowN['name2']."</option>";
+         if ($rowN['name3']!=null) echo "<option>".$rowN['name3']."</option>";
+         if ($rowN['name4']!=null) echo "<option>".$rowN['name4']."</option>";
+         echo "</select></td</tr>";
+     }
+     else if ($rowN['field_type']=="radio") {
+        echo "<tr><td>".$rowN['field_name']."</td><td>";
+        if (rowN['name1']!=null) echo "<input type='radio' name='".$rowN['field_name']."' value='".$row['name1']."' checked>".$rowN['name1'];
+         if (rowN['name2']!=null) echo "<input type='radio' name='".$rowN['field_name']."' value='".$row['name2']."' checked>".$rowN['name2'];
+         if (rowN['name3']!=null) echo "<input type='radio' name='".$rowN['field_name']."' value='".$row['name3']."' checked>".$rowN['name3'];
+         if (rowN['name4']!=null) echo "<input type='radio' name='".$rowN['field_name']."' value='".$row['name4']."' checked>".$rowN['name4'];
+         echo "</td></tr>";
+     }
+    else {
 echo "<tr><td><label>".$rowN['field_name']."</label></td>";
 echo "<td><input type=".$rowN['field_type']." style='width:100%'></input></td></tr>";
+    }
 }
 echo "</table><center>"; 
 ?>
