@@ -196,6 +196,23 @@ echo "<td><input type=".$rowN['field_type']." style='width:100%'></input></td></
 }
 echo "</table><center>"; 
 ?>
+<center><button onclick="document.getElementById('id14').style.display='block'" style="height:50px;width:235px;float:center;">Set Deadline</button></center>
+<!-- Add Deadline -->
+<div id="id14" class="modal">
+  <span onclick="document.getElementById('id14').style.display='none'" 
+class="close" title="Close Modal">&times;</span>
+<form class="modal-content animate" action="login.php" method="post">
+    <div class="container">
+    <label><b>Deadline(d-m-y): </b></label>
+        <select name='time1' id='time1'><?php for ($i=1;$i<32;$i++) { echo "<option value=".$i.">".$i."</option>"; } ?></select>
+       <select name='time2' id='time2'><?php for ($i=1;$i<13;$i++) { echo "<option value=".$i.">".$i."</option>"; } ?></select>
+        <select name='time3' id='time3'><?php for ($i=2015;$i<2040;$i++) { echo "<option value=".$i.">".$i."</option>"; } ?></select>
+    <br>
+    <button type="submit" style="height:27px;width:100%;">Complete</button>
+  </div>
+</form>
+</div>
+<!-- -->
 <center><button onclick="document.getElementById('id04').style.display='block'" style="height:50px;width:235px;float:center;">Save Form & Get Link</button></center>
 <!-- Save Form & Get Link -->
 <div id="id04" class="modal">
