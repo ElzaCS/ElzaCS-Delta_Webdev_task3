@@ -201,7 +201,7 @@ echo "</table><center>";
 <div id="id14" class="modal">
   <span onclick="document.getElementById('id14').style.display='none'" 
 class="close" title="Close Modal">&times;</span>
-<form class="modal-content animate" action="login.php" method="post">
+<form class="modal-content animate" action="time.php" method="post">
     <div class="container">
     <label><b>Deadline(d-m-y): </b></label>
         <select name='time1' id='time1'><?php for ($i=1;$i<32;$i++) { echo "<option value=".$i.">".$i."</option>"; } ?></select>
