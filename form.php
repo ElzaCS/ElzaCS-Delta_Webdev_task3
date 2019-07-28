@@ -66,7 +66,7 @@ class="close" title="Close Modal">&times;</span>
 <?php if ($_POST['typ']!='') { ?>
 <form class="newstuff2" action="form.php" method="post" style="text-align:left;">
     <tr><td><label><b>Field Type</b></label></td>
-        <td><input name='typ' value'<?php echo $_POST['typ'];?>'></input></td></tr>
+        <td><?php echo $_POST['typ'];?><input name='typ' type='hidden' value'<?php echo $_POST['typ'];?>'></input></td></tr>
             <tr><td><label><b>Field Name</b></label></td>
             <?php if ($_POST['typ']=="dropdown" || $_POST['typ']=="radio") {
     echo "<tr><td><Label><b>Option1 Label</b></label></td>";
