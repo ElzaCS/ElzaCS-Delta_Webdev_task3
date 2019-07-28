@@ -192,6 +192,7 @@ $resN = mysqli_query($conn, $sqlN);
 echo "<tr><td><label>".$rowN['field_name']."</label></td>";
 echo "<td><input type=".$rowN['field_type']." style='width:100%'></input></td></tr>";
     }
+ echo "<td><a href='delete.php?field=".$rowN['field_name']."&type=".$rowN['field_type']."'><button>Delete</button></td></tr>";
 }
 echo "</table><center>"; 
 ?>
