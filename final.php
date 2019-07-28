@@ -23,7 +23,23 @@ echo "<center><form action='getResp.php' method='post'><table frame='box' bgcolo
 $sqlm="select * from myUsers where form_id=".$id.";";
 $resm = mysqli_query($conn, $sqlm);
 $rowm = mysqli_fetch_array($resm) ;
-echo "<h1>".$rowm['form_name']."</h1><br>";
+    $gd=$rowm['date'];
+    $gm=$rowm['month'];
+    $gy=$rowm['year'];
+    
+$sqln="select now();";
+$resn = mysqli_query($conn, $sqln);
+$rown = mysqli_fetch_array($resn);
+    $date=date("d/m/Y");
+    $td=substr($date,0,2);
+    $tm=substr($date,3,2);
+    $ty=substr($date,6,4);
+    
+if ( ($ty<$gy) || (($ty==$gy) && ($tm<$gm)) || (($ty==$gy) &&($tm==$gm) && ($td<=$gd)) ) {
+$sqlm="select * from myUsers where form_id=".$id.";";
+$resm = mysqli_query($conn, $sqlm);
+$rowm = mysqli_fetch_array($resm) ;
+    echo "<h1>".$rowm['form_name']."</h1><br>";
 echo "<h2>".$rowm['form_desc']."</h2><br>";
 
 echo "<tr><td><input type='hidden' id='fid' name='fid' value=".$id."></td></tr>";
@@ -59,6 +75,9 @@ session_start();
    $_SESSION['rid']=$rand;
 echo "<tr><td colspan='2'><center><button type='submit'>Submit</button></center></td></tr>";
 echo "</table></form></center>"; 
+}
+    else
+        echo "Sorry. The deadline to submit this form is over.";
 ?>
 </body>
 </html>
