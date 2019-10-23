@@ -1,13 +1,9 @@
 <?php
+require_once('config.php');
 $field = $_REQUEST['field'];
 $type = $_REQUEST['type'];
 session_start();
 $fid=$_SESSION['fid'];
-
-$servername = "localhost";
-$username = "root";
-$password = "redhat";
-$dbname = "wallDB";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -1,10 +1,11 @@
 <html>
 <body>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "redhat";
-$dbname = "wallDB";
+require_once('config.php');
+// $servername = "localhost";
+// $username = "root";
+// $password = "redhat";
+// $dbname = "wallDB";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection

@@ -1,4 +1,5 @@
 <?php
+require_once('config.php');
 $t1 = $_POST['time1'];
 $t2 = $_POST['time2'];
 $t3 = $_POST['time3'];
@@ -6,13 +7,6 @@ $t3 = $_POST['time3'];
 
 session_start();
 //echo $_SESSION['fid']."<br>";
-
-
-
- $servername = "localhost";
-$username = "root";
-$password = "redhat";
-$dbname = "wallDB";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
