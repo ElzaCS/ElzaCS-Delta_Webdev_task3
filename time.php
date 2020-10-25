@@ -16,13 +16,13 @@ if ($conn->connect_error) {
 }
 
 //add to db
-$sql="update myUsers set date=".$t1." where form_id=".$_SESSION['fid']."";
+$sql="update user_forms set date=".$t1." where formId=".$_SESSION['fid']."";
 if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>";   
   } //else echo "true";
-$sql="update myUsers set month=".$t2." where form_id=".$_SESSION['fid']."";
+$sql="update user_forms set month=".$t2." where formId=".$_SESSION['fid']."";
 if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>";   
   } //else echo "true";
-$sql="update myUsers set year=".$t3." where form_id=".$_SESSION['fid']."";
+$sql="update user_forms set year=".$t3." where formId=".$_SESSION['fid']."";
 if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>";   
   } //else echo "true";
 header("Location: form.php");

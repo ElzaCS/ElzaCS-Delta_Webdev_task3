@@ -19,7 +19,7 @@ echo "<h2>Responses:</h2>";
 echo "<center><table border='1' bgcolor='#b3f0ff' width='700px'><tr>";
 
 //table name and description
-$sql="select * from myUsers where form_id=".$id.";";
+$sql="select * from user_forms where formId=".$id.";";
 $res = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($res) ;
 echo "<h1>Form Name: ".$row['form_name']."<h1>";

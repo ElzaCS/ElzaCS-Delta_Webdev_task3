@@ -24,7 +24,7 @@ if ($_POST['fname']!=null) {
    $_SESSION['fname']=$_POST['fname'];
  
    //add form name&desc to myUsers
-   $sql="update myUsers set form_name='".$_POST['fname']."',form_desc='".$_POST['fdesc']."',form_id=".$_SESSION['fid']." where name='".$_SESSION['user']."';"; 
+   $sql="insert into user_forms (userId, formId, form_name, form_desc) values (".$_SESSION['userId'].", ".$_SESSION['fid'].", '".$_POST['fname']."', '".$_POST['fdesc']."');";
    if ($conn->query($sql) === FALSE) {  echo "<br>shocking: ".$sql."<br>";   }
 }
 
@@ -93,7 +93,7 @@ if ($_POST['typ']=="text" && $_POST['txt']!=null) {
    }
 
   //add the text field label to responses table
-  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000) not null;";
+  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000);";
   if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
   }
   $_POST['typ']=null;
@@ -106,7 +106,7 @@ if ($_POST['typ']=="number" && $_POST['txt']!=null) {
   }
 
   //add the number field label to responses table
-  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000) not null;";
+  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000);";
   if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
   }
   $_POST['typ']=null;
@@ -125,7 +125,7 @@ if ($_POST['typ']=="dropdown" && $_POST['txt']!=null) {
   }
 
   //add the dropdown field label to responses table
-  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000) not null;";
+  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000);";
   if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
   }
 
@@ -156,7 +156,7 @@ if ($_POST['typ']=="radio" && $_POST['txt']!=null) {
   }
 
   //add the radio field label to responses table
-  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000) not null;";
+  $sql="alter table form_".$_SESSION['fid']." add column ".$_POST['txt']." varchar(1000);";
   if ($conn->query($sql) === FALSE) {  //echo "<br>error in: ".$sql."<br>"; 
   }
 
@@ -183,7 +183,7 @@ if ($_POST['typ']=="radio" && $_POST['txt']!=null) {
 
 
 //PRINTING FORM PREVIEW
- $sqlN="select * from myUsers where form_id=".$_SESSION['fid'].";";
+ $sqlN="select * from myUsers, user_forms where myUsers.id=user_forms.userId and user_forms.formId=".$_SESSION['fid'].";";
 $resN = mysqli_query($conn, $sqlN);
 $rowN = mysqli_fetch_array($resN) ;
 //form name & description

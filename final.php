@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 echo "<center><form action='getResp.php' method='post'><table frame='box' bgcolor='#b3f0ff'>";
 
-$sqlm="select * from myUsers where form_id=".$id.";";
+$sqlm="select * from user_forms where formId=".$id.";";
 $resm = mysqli_query($conn, $sqlm);
 $rowm = mysqli_fetch_array($resm) ;
 

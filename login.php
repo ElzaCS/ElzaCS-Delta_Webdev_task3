@@ -40,6 +40,7 @@ if(isset($_POST['submitbtn'])) {
   if (hash('ripemd160', $_POST['psw'])==$row1['password'] && $_POST['psw']!=null) {  
      //save username
      $_SESSION['user']=$_POST['uname'];
+     $_SESSION['userId']=$row1['id'];
 
     // enter unique no. to table
     $sup="update myUsers set uniqueID=".$_SESSION['rand']." where name='".$_POST['uname']."';";
@@ -47,7 +48,7 @@ if(isset($_POST['submitbtn'])) {
   }
 }
 else
-    $sql2 = "select * from myUsers where name='".$_SESSION['user']."';";
+    $sql2 = "select * from myUsers, user_forms, where myUsers.id=user_forms=userId where myUsers.name='".$_SESSION['user']."';";
     $result2 = mysqli_query($conn,$sql2);
     $row2 = mysqli_fetch_array($result2) ;
     if ($_SESSION['rand']==null || $_SESSION['user']==null) { 
@@ -71,7 +72,7 @@ if ($conn->connect_error) {
 
 // print user's old forms
 echo "<center><h2>Your Forms:</h2>";
-$sqlget = "select count(*) from myUsers where name='".$_SESSION['user']."';";
+$sqlget = "select count(*) from user_forms, myUsers where user_forms.userId=myUsers.id and myUsers.name='".$_SESSION['user']."';";
  $result = mysqli_query($conn, $sqlget);
 $row =mysqli_fetch_array($result, MYSQLI_ASSOC);
  echo "<table border='1' bgcolor='#ccffcc' width='700px'>";
@@ -80,7 +81,7 @@ if ($row['count(*)']>0) {
 else{
  echo "No forms yet";}
  $i=1;
-$sqlget = "select * from myUsers where name='".$_SESSION['user']."';";
+$sqlget = "select * from user_forms, myUsers where user_forms.userId=myUsers.id and myUsers.name='".$_SESSION['user']."';";
  $result = mysqli_query($conn, $sqlget);
  while($row =mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 	if ($row['form_name']!=null) { 
@@ -93,7 +94,7 @@ echo $i;
 	echo "</td><td>";
 	echo $row['form_id'];
 	echo "</td><td>";
-	echo "<a href='seeResp.php?id=".$row['form_id']."'>View Responses</a>";
+	echo "<a href='seeResp.php?id=".$row['formId']."'>View Responses</a>";
 	echo "</td></tr>";
      $i+=1;
 	}
