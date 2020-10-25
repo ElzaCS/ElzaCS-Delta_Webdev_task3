@@ -9,9 +9,7 @@
 <div style="background-color:black; color:white; top:0px;">
 <p><h1>Welcome <?php session_start(); echo $_SESSION['user'];?> to the Form-Generator</h1></p>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "redhat";
+require_once('config.php');
 
 // Create connection for database
 $conn = new mysqli($servername, $username, $password);
@@ -31,7 +29,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 //create table
-   $sql1="create table myUsers (id int(5) auto_increment primary key,name varchar(20) not null,password varchar(45) not null,uniqueID int(15) unsigned,form_name varchar(20) not null,form_desc varchar(40) not null,form_id int(10),date int(2),month int(2),year int(4));";
+   $sql1="create table myUsers (id int(5) auto_increment primary key,name varchar(20) not null,password varchar(45) not null,uniqueID int(15) unsigned,form_name varchar(20),form_desc varchar(40),form_id int(10),date int(2),month int(2),year int(4));";
     if ($conn->query($sql1) === FALSE) 
 	echo "error creating table myUsers";
     $sql2="create table forms (form_id int(15),field_name varchar(20) not null,field_type varchar(10) not null);";
