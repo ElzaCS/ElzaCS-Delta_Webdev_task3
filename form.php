@@ -24,7 +24,7 @@ if ($_POST['fname']!=null) {
    $_SESSION['fname']=$_POST['fname'];
  
    //add form name&desc to myUsers
-   $sql="insert into myUsers (name,form_name,form_desc,form_id) values('".$_SESSION['user']."','".$_POST['fname']."','".$_POST['fdesc']."',".$_SESSION['fid'].");"; 
+   $sql="update myUsers set form_name='".$_POST['fname']."',form_desc='".$_POST['fdesc']."',form_id=".$_SESSION['fid']." where name='".$_SESSION['user']."';"; 
    if ($conn->query($sql) === FALSE) {  echo "<br>shocking: ".$sql."<br>";   }
 }
 
