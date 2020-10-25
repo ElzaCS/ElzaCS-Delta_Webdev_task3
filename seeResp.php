@@ -4,13 +4,9 @@
 </head>
 <body background="https://st.depositphotos.com/1596326/2653/v/950/depositphotos_26532107-stock-illustration-seamless-rich-floral-background.jpg">
 <?php
+require_once('config.php');
 //form id
 $id = intval($_GET['id']);
-
-$servername = "localhost";
-$username = "root";
-$password = "redhat";
-$dbname = "wallDB";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
