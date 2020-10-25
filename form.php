@@ -229,7 +229,7 @@ class="close" title="Close Modal">&times;</span>
 <form class="modal-content animate" action="time.php" method="post">
     <div class="container">
     <label><b>Deadline(d-m-y): </b></label><select name='time1' id='time1' ><?php for ($i=01;$i<32;$i++) { echo "<option value=".$i.">".$i."</option>";} ?></select>
-<select name='time2' id='time2' ><?php for ($i=01;$i<13;$i++) { echo "<option value=".$i.">".$i."</option>";} ?></select><select name='time3' id='time3'><?php for ($i=2000;$i<2020;$i++) { echo "<option value=".$i.">".$i."</option>";} ?></select>
+<select name='time2' id='time2' ><?php for ($i=01;$i<13;$i++) { echo "<option value=".$i.">".$i."</option>";} ?></select><select name='time3' id='time3'><?php for ($i=2000;$i<2030;$i++) { echo "<option value=".$i.">".$i."</option>";} ?></select>
     <br>
     <button type="submit" style="height:27px;width:100%;">Complete</button>
   </div>
