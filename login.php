@@ -19,10 +19,8 @@ class="close" title="Close Modal">&times;</span>
 <!----->
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "redhat";
-$dbname = "wallDB";
+require_once('config.php');
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection

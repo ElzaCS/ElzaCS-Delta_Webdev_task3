@@ -5,11 +5,8 @@
 </head>
 <body>
 <?php
+require_once('config.php');
 $id = intval($_GET['id']);
-$servername = "localhost";
-$username = "root";
-$password = "redhat";
-$dbname = "wallDB";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

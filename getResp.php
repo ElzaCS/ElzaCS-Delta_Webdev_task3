@@ -4,10 +4,7 @@
 <body>
 <h3>Thank you! Your response has been submitted.</h3>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "redhat";
-$dbname = "wallDB";
+require_once('config.php');
 
 session_start();
 
